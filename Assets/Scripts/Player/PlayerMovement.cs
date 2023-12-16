@@ -6,10 +6,16 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private bool isHorizontal;
+    private bool isOnWall;
     private bool isDoubleJump;
 
+    [Header("Parameter")]
     [SerializeField] private float runSpeed;
+
     [SerializeField] private float jumpSpeed;
+    [SerializeField] private float moveOnWallSpeed;
+
+    [Header("Layer Mask")]
     [SerializeField] private LayerMask groundLayer;
 
     private void Awake()
@@ -18,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         isHorizontal = true;
+        isOnWall = false;
     }
 
     private void Update()
@@ -36,16 +43,18 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            rigidbody.gravityScale = 0;
+            rigidbody.velocity = new Vector2(0, verticalInput * moveOnWallSpeed);
         }
 
         // When player jumping
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (OnGround())
+            if (isDoubleJump)
                 Jump();
         }
 
-        Debug.Log(OnGround());
+        UpdateState();
     }
 
     /// <summary>
@@ -60,12 +69,25 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = true;
     }
 
+    /// <summary>
+    /// Handle action jump of player
+    /// </summary>
     private void Jump()
     {
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpSpeed);
-        animator.SetTrigger("isJumping");
+        if (OnGround())
+            animator.SetTrigger("isJumping");
+        else
+        {
+            animator.SetBool("isDoubleJumping", true);
+            isDoubleJump = false;
+        }
     }
 
+    /// <summary>
+    /// Check player is on ground or not
+    /// </summary>
+    /// <returns>true if player is on ground, false if player is not in ground</returns>
     private bool OnGround()
     {
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
@@ -74,7 +96,26 @@ public class PlayerMovement : MonoBehaviour
 
         if (hit)
             return true;
+
         return false;
+    }
+
+    /// <summary>
+    /// Update state when player moving or idle
+    /// </summary>
+    private void UpdateState()
+    {
+        // When player in ground, reset all state to origin
+        if (OnGround())
+        {
+            isDoubleJump = true;
+            animator.SetBool("isDoubleJumping", false);
+            animator.SetBool("isCrashing", false);
+        }
+
+        // Handle state when player crashing
+        if (rigidbody.velocity.y < -10)
+            animator.SetBool("isCrashing", true);
     }
 
     /**/
