@@ -6,52 +6,75 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private SpriteRenderer spriteRenderer;
     private bool isHorizontal;
-    private bool isOnWall;
     private bool isDoubleJump;
+    private BoxCollider2D boxCollider;
 
     [Header("Parameter")]
     [SerializeField] private float runSpeed;
 
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float moveOnWallSpeed;
+    [SerializeField] private float originGravity;
 
     [Header("Layer Mask")]
     [SerializeField] private LayerMask groundLayer;
+
+    [SerializeField] private LayerMask wallLayer;
+
+    [Header("Animation")]
+    [SerializeField] private string walking;
+
+    [SerializeField] private string jumping;
+    [SerializeField] private string doubleJumping;
+    [SerializeField] private string climbing;
+    [SerializeField] private string climbingUp;
+    [SerializeField] private string climbingDown;
+    [SerializeField] private string crashing;
 
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         isHorizontal = true;
-        isOnWall = false;
     }
 
     private void Update()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
-        float verticalInput = Input.GetAxisRaw("Vertical");
 
         // When player move on the ground
         if (isHorizontal)
         {
             // Set speed and animation walking for player
             rigidbody.velocity = new Vector2(horizontalInput * runSpeed, rigidbody.velocity.y);
-            animator.SetFloat("isWalking", Mathf.Abs(horizontalInput));
+            animator.SetFloat(walking, Mathf.Abs(horizontalInput));
 
             SetDirection(horizontalInput);
         }
         else
         {
-            rigidbody.gravityScale = 0;
-            rigidbody.velocity = new Vector2(0, verticalInput * moveOnWallSpeed);
+            rigidbody.velocity = new Vector2(0, horizontalInput * moveOnWallSpeed);
+            animator.SetFloat(climbingUp, horizontalInput);
+            animator.SetFloat(climbingDown, horizontalInput);
         }
 
         // When player jumping
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isDoubleJump)
+            if (isDoubleJump && isHorizontal)
                 Jump();
+        }
+
+        // When player change mode from move on ground to move on wall
+        if (isHorizontal && OnWall() && Input.GetKeyDown(KeyCode.Mouse2))
+        {
+            isHorizontal = false;
+            rigidbody.gravityScale = 0;
+            rigidbody.velocity = new Vector2(0, 0.5f);
+            animator.SetBool(climbing, true);
+            rigidbody.velocity = Vector2.zero;
         }
 
         UpdateState();
@@ -76,10 +99,10 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpSpeed);
         if (OnGround())
-            animator.SetTrigger("isJumping");
+            animator.SetTrigger(jumping);
         else
         {
-            animator.SetBool("isDoubleJumping", true);
+            animator.SetBool(doubleJumping, true);
             isDoubleJump = false;
         }
     }
@@ -90,13 +113,26 @@ public class PlayerMovement : MonoBehaviour
     /// <returns>true if player is on ground, false if player is not in ground</returns>
     private bool OnGround()
     {
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        Vector2 size = new Vector2(collider.bounds.size.x - 0.02f, collider.bounds.size.y - 0.1f);
-        RaycastHit2D hit = Physics2D.BoxCast(collider.bounds.center, size, 0, Vector2.down, 0.06f, groundLayer);
+        Vector2 size = new Vector2(boxCollider.bounds.size.x - 0.02f, boxCollider.bounds.size.y - 0.1f);
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, size, 0, Vector2.down, 0.06f, groundLayer);
+
+        Debug.Log("Player is on ground: " + (hit ? true : false));
 
         if (hit)
             return true;
 
+        return false;
+    }
+
+    private bool OnWall()
+    {
+        Vector2 size = new Vector2(boxCollider.bounds.size.x - 0.02f, boxCollider.bounds.size.y - 0.1f);
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, size, 0, Vector2.zero, float.PositiveInfinity, wallLayer);
+
+        Debug.Log("Player is on wall: " + (hit ? true : false));
+
+        if (hit)
+            return true;
         return false;
     }
 
@@ -109,13 +145,16 @@ public class PlayerMovement : MonoBehaviour
         if (OnGround())
         {
             isDoubleJump = true;
-            animator.SetBool("isDoubleJumping", false);
-            animator.SetBool("isCrashing", false);
+            isHorizontal = true;
+            rigidbody.gravityScale = originGravity;
+            animator.SetBool(doubleJumping, false);
+            animator.SetBool(crashing, false);
+            animator.SetBool(climbing, false);
         }
 
         // Handle state when player crashing
         if (rigidbody.velocity.y < -10)
-            animator.SetBool("isCrashing", true);
+            animator.SetBool(crashing, true);
     }
 
     /**/
