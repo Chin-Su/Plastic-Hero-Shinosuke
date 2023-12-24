@@ -31,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private string climbingDown;
     [SerializeField] private string crashing;
 
+    [Header("Sound Effect")]
+    [SerializeField] private AudioClip jumpSound;
+
+    [SerializeField] private AudioClip doubleJumpSound;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -44,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        // When player move on the ground
+        // When player moving on the ground
         if (isHorizontal)
         {
             // Set speed and animation walking for player
@@ -53,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
             SetDirection(horizontalInput);
         }
+        // When player moving on the wall
         else
         {
             rigidbody.velocity = new Vector2(0, horizontalInput * moveOnWallSpeed);
@@ -99,10 +105,14 @@ public class PlayerMovement : MonoBehaviour
     {
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpSpeed);
         if (OnGround())
+        {
             animator.SetTrigger(jumping);
+            SoundManager.Instance.Play(jumpSound);
+        }
         else
         {
             animator.SetBool(doubleJumping, true);
+            SoundManager.Instance.Play(doubleJumpSound);
             isDoubleJump = false;
         }
     }

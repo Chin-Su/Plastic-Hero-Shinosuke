@@ -285,6 +285,8 @@ MonoBehaviour:
   climbingUp: isClimbingUp
   climbingDown: isClimbingDown
   crashing: isCrashing
+  jumpSound: {fileID: 8300000, guid: 7902340a8899bfb45be24b85164e1fb5, type: 3}
+  doubleJumpSound: {fileID: 8300000, guid: f76c306a353b85d43aa92d0cc0b4fcdc, type: 3}
 --- !u!50 &125641971
 Rigidbody2D:
   serializedVersion: 4
@@ -697,6 +699,8 @@ GameObject:
   - component: {fileID: 1790211794}
   - component: {fileID: 1790211793}
   - component: {fileID: 1790211792}
+  - component: {fileID: 1790211796}
+  - component: {fileID: 1790211797}
   m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
@@ -835,3 +839,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1790211796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790211791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed392350a07b6a40a63724f8f0709bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayer: Ground
+--- !u!58 &1790211797
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790211791}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 4.5}
+  serializedVersion: 2
+  m_Radius: 0.1
