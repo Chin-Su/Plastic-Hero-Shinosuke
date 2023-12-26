@@ -16,7 +16,6 @@ public class BulletController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponentInChildren<Animator>();
-        timeLife = 3;
     }
 
     private void Update()
@@ -29,7 +28,11 @@ public class BulletController : MonoBehaviour
 
     public void SetDirection(int direction)
     {
+        timeLife = 3;
         this.direction = direction;
+        var localScale = transform.localScale;
+        if (direction < 0)
+            localScale = new Vector3(-localScale.x, localScale.y, localScale.z);
     }
 
     public void Destroy()

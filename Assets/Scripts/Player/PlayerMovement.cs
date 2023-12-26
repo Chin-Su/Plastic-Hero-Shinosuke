@@ -78,7 +78,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isHorizontal = false;
             rigidbody.gravityScale = 0;
-            rigidbody.velocity = new Vector2(0, 0.5f);
             animator.SetBool(climbing, true);
             rigidbody.velocity = Vector2.zero;
         }
@@ -92,10 +91,13 @@ public class PlayerMovement : MonoBehaviour
     /// <param name="value">Is value when player move to left or right</param>
     private void SetDirection(float value)
     {
+        var localScale = transform.localScale;
         if (value < 0)
-            spriteRenderer.flipX = false;
+        {
+            transform.localScale = new Vector3(-Mathf.Abs(localScale.x), localScale.y, localScale.z);
+        }
         if (value > 0)
-            spriteRenderer.flipX = true;
+            transform.localScale = new Vector3(Mathf.Abs(localScale.x), localScale.y, localScale.z);
     }
 
     /// <summary>
@@ -166,6 +168,8 @@ public class PlayerMovement : MonoBehaviour
         if (rigidbody.velocity.y < -10)
             animator.SetBool(crashing, true);
     }
+
+    public bool IsOnWall() => !isHorizontal;
 
     /**/
 
