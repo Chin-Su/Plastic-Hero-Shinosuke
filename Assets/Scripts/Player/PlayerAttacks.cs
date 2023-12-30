@@ -3,9 +3,10 @@ using UnityEngine;
 public class PlayerAttacks : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject[] projectles;
     [SerializeField] private float timeCoolDown;
-    [SerializeField] private Animator animator;
+
+    [HideInInspector]
+    [SerializeField] private GameObject[] projectles;
 
     private PlayerMovement playerMovement;
     private float timeCounter;
@@ -29,6 +30,7 @@ public class PlayerAttacks : MonoBehaviour
 
     private void Fire()
     {
+        this.PostEvent(EventId.Attacking);
         GameObject bullet = projectles[FindBullet()];
         bullet.SetActive(true);
         bullet.transform.position = firePoint.position;

@@ -1,11 +1,8 @@
 using UnityEngine;
-using System;
 
 public class PlayerMovement : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
-    private Animator animator;
-    private SpriteRenderer spriteRenderer;
     private bool isHorizontal;
     private bool isDoubleJump;
     private BoxCollider2D boxCollider;
@@ -22,16 +19,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private LayerMask wallLayer;
 
-    [Header("Animation")]
-    [SerializeField] private string walking;
-
-    [SerializeField] private string jumping;
-    [SerializeField] private string doubleJumping;
-    [SerializeField] private string climbing;
-    [SerializeField] private string climbingUp;
-    [SerializeField] private string climbingDown;
-    [SerializeField] private string crashing;
-
     [Header("Sound Effect")]
     [SerializeField] private AudioClip jumpSound;
 
@@ -40,9 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         isHorizontal = true;
     }
 
@@ -55,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
         {
             // Set speed and animation walking for player
             rigidbody.velocity = new Vector2(horizontalInput * runSpeed, rigidbody.velocity.y);
-            animator.SetFloat(walking, Mathf.Abs(horizontalInput));
+            // Post event when player move
+            this.PostEvent(EventId.Walking, Mathf.Abs(horizontalInput));
 
             SetDirection(horizontalInput);
         }
@@ -63,8 +49,9 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rigidbody.velocity = new Vector2(0, horizontalInput * moveOnWallSpeed);
-            animator.SetFloat(climbingUp, horizontalInput);
-            animator.SetFloat(climbingDown, horizontalInput);
+            // Post event when player climbing
+            this.PostEvent(EventId.ClimbingUp, horizontalInput);
+            this.PostEvent(EventId.ClimbingDown, horizontalInput);
         }
 
         // When player jumping
@@ -79,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isHorizontal = false;
             rigidbody.gravityScale = 0;
-            animator.SetBool(climbing, true);
+            this.PostEvent(EventId.Climbing, true);
             rigidbody.velocity = Vector2.zero;
         }
 
@@ -109,12 +96,12 @@ public class PlayerMovement : MonoBehaviour
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpSpeed);
         if (OnGround())
         {
-            animator.SetTrigger(jumping);
+            this.PostEvent(EventId.Jumping);
             SoundManager.Instance.Play(jumpSound);
         }
         else
         {
-            animator.SetBool(doubleJumping, true);
+            this.PostEvent(EventId.DoubleJumping, true);
             SoundManager.Instance.Play(doubleJumpSound);
             isDoubleJump = false;
         }
@@ -160,14 +147,14 @@ public class PlayerMovement : MonoBehaviour
             isDoubleJump = true;
             isHorizontal = true;
             rigidbody.gravityScale = originGravity;
-            animator.SetBool(doubleJumping, false);
-            animator.SetBool(crashing, false);
-            animator.SetBool(climbing, false);
+            this.PostEvent(EventId.DoubleJumping, false);
+            this.PostEvent(EventId.Crashing, false);
+            this.PostEvent(EventId.Climbing, false);
         }
 
         // Handle state when player crashing
         if (rigidbody.velocity.y < -10)
-            animator.SetBool(crashing, true);
+            this.PostEvent(EventId.Crashing, true);
     }
 
     public bool IsOnWall() => !isHorizontal;

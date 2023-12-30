@@ -200,9 +200,10 @@ GameObject:
   - component: {fileID: 125641968}
   - component: {fileID: 125641966}
   - component: {fileID: 125641971}
-  - component: {fileID: 125641970}
   - component: {fileID: 125641972}
+  - component: {fileID: 125641970}
   - component: {fileID: 125641973}
+  - component: {fileID: 125641974}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -345,13 +346,6 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
-  walking: isWalking
-  jumping: isJumping
-  doubleJumping: isDoubleJumping
-  climbing: isClimbing
-  climbingUp: isClimbingUp
-  climbingDown: isClimbingDown
-  crashing: isCrashing
   jumpSound: {fileID: 8300000, guid: 7902340a8899bfb45be24b85164e1fb5, type: 3}
   doubleJumpSound: {fileID: 8300000, guid: f76c306a353b85d43aa92d0cc0b4fcdc, type: 3}
 --- !u!50 &125641971
@@ -427,6 +421,31 @@ MonoBehaviour:
   - {fileID: 1842324299}
   - {fileID: 813710227}
   - {fileID: 604737898}
+--- !u!114 &125641974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125641965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1746096727402f4ca8595e18d54fbd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walking: isWalking
+  jumping: isJumping
+  doubleJumping: isDoubleJumping
+  crashing: isCrashing
+  flying: isFlying
+  joking: isJoking
+  climbingUp: isClimbingUp
+  climbingDown: isClimbingDown
+  climbing: isClimbing
+  attacking: isAttacking
+  die: isDie
+  attacked: isAttacked
+  winner: isWinner
 --- !u!1 &144460725 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6312650175889843583, guid: 7239e7b9d30a5544c9635c7de709a618, type: 3}

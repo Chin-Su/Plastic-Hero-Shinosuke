@@ -1,5 +1,17 @@
 public enum EventId
 {
     none = 0,
-    Move
+    Walking,
+    Jumping,
+    DoubleJumping,
+    Crashing,
+    Flying,
+    Joking,
+    ClimbingUp,
+    ClimbingDown,
+    Climbing,
+    Attacking,
+    Die,
+    Attacked,
+    Winner
 }

@@ -106,7 +106,7 @@ public class EventDispatcher : MonoBehaviour
 
 public static class EventDispatcherExtention
 {
-    public static void ResgisterListener(this MonoBehaviour listener, EventId evenId, Action<object> callback)
+    public static void RegisterListener(this MonoBehaviour listener, EventId evenId, Action<object> callback)
     {
         EventDispatcher.Instance.RegisterListener(evenId, callback);
     }
