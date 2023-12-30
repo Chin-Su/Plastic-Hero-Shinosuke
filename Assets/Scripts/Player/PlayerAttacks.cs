@@ -3,8 +3,9 @@ using UnityEngine;
 public class PlayerAttacks : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float timeCoolDown;
     [SerializeField] private GameObject[] projectles;
+    [SerializeField] private float timeCoolDown;
+    [SerializeField] private Animator animator;
 
     private PlayerMovement playerMovement;
     private float timeCounter;
@@ -17,6 +18,7 @@ public class PlayerAttacks : MonoBehaviour
 
     private void Update()
     {
+        // Check if player not move on wall and can attack
         if (!playerMovement.IsOnWall() && Input.GetMouseButtonDown(0) && timeCounter < 0)
         {
             Fire();
