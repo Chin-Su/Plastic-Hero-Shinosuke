@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 125641970}
   - component: {fileID: 125641973}
   - component: {fileID: 125641974}
+  - component: {fileID: 125641975}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -446,6 +447,18 @@ MonoBehaviour:
   die: isDie
   attacked: isAttacked
   winner: isWinner
+--- !u!114 &125641975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125641965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4224a1ceb955d41acd23553606ea81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &144460725 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6312650175889843583, guid: 7239e7b9d30a5544c9635c7de709a618, type: 3}

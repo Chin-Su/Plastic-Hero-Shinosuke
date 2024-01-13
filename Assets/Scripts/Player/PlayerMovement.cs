@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // When player change mode from move on ground to move on wall
-        if (isHorizontal && OnWall() && Input.GetKeyDown(KeyCode.Mouse2))
+        if (isHorizontal && OnWall() && Input.GetMouseButtonDown(3))
         {
             isHorizontal = false;
             rigidbody.gravityScale = 0;
@@ -155,6 +155,10 @@ public class PlayerMovement : MonoBehaviour
         // Handle state when player crashing
         if (rigidbody.velocity.y < -10)
             this.PostEvent(EventId.Crashing, true);
+
+        // Handle some different animation
+        if (Input.GetMouseButtonDown(2))
+            this.PostEvent(EventId.Joking);
     }
 
     public bool IsOnWall() => !isHorizontal;

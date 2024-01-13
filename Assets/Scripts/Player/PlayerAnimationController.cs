@@ -65,7 +65,9 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
     private void Joking()
-    { }
+    {
+        animator.SetTrigger(joking);
+    }
 
     private void ClimbingUp(float velocity)
     {
