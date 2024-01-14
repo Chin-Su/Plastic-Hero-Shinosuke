@@ -5,7 +5,6 @@ public class PlayerMovement : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
     private bool isHorizontal;
-    private bool onGround;
     private bool isDoubleJump;
     private BoxCollider2D boxCollider;
 
@@ -62,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         // When player jumping
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if ((isDoubleJump || onGround) && isHorizontal)
+            if (isDoubleJump && isHorizontal)
                 Jump();
         }
 
@@ -103,11 +102,10 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpSpeed);
-        if (onGround)
+        if (OnGround())
         {
             this.PostEvent(EventId.Jumping);
             SoundManager.Instance.Play(jumpSound);
-            onGround = false;
         }
         else if (isDoubleJump)
         {
@@ -117,25 +115,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        // Check if player is on ground and collision by top - bot direction
-        if (collision.gameObject.CompareTag("Platform") && collision.contacts[0].normal.y == 1)
-        {
-            onGround = true;
-        }
-    }
-
     /// <summary>
-    /// Used to set false when player not in ground
+    /// Used to check player is on ground
     /// </summary>
-    private void CheckOnGround()
+    /// <returns>true if player is on ground, false if player is not on ground</returns>
+    private bool OnGround()
     {
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size - Vector3.one * 0.1f, 0, Vector2.down, 0.15f, groundLayer);
-        if (hit.rigidbody == null)
-            onGround = false;
-
-        Debug.Log("Player is on wall: " + (onGround));
+        // Create a boxcast to detect object player collision
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.05f, groundLayer);
+        if (hit.collider != null)
+        {
+            // Calculate collision direction
+            Vector2 collisionDirection = hit.point - new Vector2(boxCollider.bounds.center.x, boxCollider.bounds.center.y);
+            // Calculate angle to detect player on ground by horizontal or vertical
+            float angle = Vector2.Angle(Vector2.down, collisionDirection);
+            // If angle < 45 so player collision with ground by vertical direction
+            if (angle < 45)
+                return true;
+            return false;
+        }
+        return false;
     }
 
     /// <summary>
@@ -157,9 +156,8 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void UpdateState()
     {
-        CheckOnGround();
         // When player in ground, reset all state to origin
-        if (onGround)
+        if (OnGround())
         {
             isDoubleJump = true;
             isHorizontal = true;

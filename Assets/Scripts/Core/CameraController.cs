@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
     {
         // Calculate pos x and pos y of camera
         float xPos = Mathf.Clamp(player.position.x + lookAhead, minPosX, maxPosX);
-        float yPos = Mathf.Clamp(player.position.y + 2, minPosY, maxPosY);
+        float yPos = Mathf.Clamp(player.position.y + 1.5f, minPosY, maxPosY);
 
         // Move camera
         transform.position = new Vector3(xPos, yPos, transform.position.z);
