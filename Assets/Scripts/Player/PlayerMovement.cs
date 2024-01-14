@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -62,12 +63,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // When player change mode from move on ground to move on wall
-        if (isHorizontal && OnWall() && Input.GetMouseButtonDown(3))
+        if (isHorizontal && OnWall() && Input.GetMouseButtonDown(1))
         {
-            isHorizontal = false;
-            rigidbody.gravityScale = 0;
-            this.PostEvent(EventId.Climbing, true);
-            rigidbody.velocity = Vector2.zero;
+            rigidbody.DOMoveY(transform.position.y + 0.25f, 0.1f).OnComplete(() =>
+            {
+                isHorizontal = false;
+                this.PostEvent(EventId.Climbing, true);
+                rigidbody.gravityScale = 0;
+                rigidbody.velocity = Vector2.zero;
+                DOTween.Kill(rigidbody);
+            });
         }
 
         UpdateState();

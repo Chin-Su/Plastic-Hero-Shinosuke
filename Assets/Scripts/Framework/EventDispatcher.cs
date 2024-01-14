@@ -73,7 +73,7 @@ public class EventDispatcher : MonoBehaviour
         if (callback != null)
         {
             callback(param);
-            Debug.Log("Message: execute action " + nameof(callback));
+            Debug.Log("Message: execute action callback of event " + eventId);
         }
         else
         {
