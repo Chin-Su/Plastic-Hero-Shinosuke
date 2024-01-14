@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
     private bool isHorizontal;
+    private bool onGround;
     private bool isDoubleJump;
     private BoxCollider2D boxCollider;
 
@@ -24,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip jumpSound;
 
     [SerializeField] private AudioClip doubleJumpSound;
+    [SerializeField] private AudioClip climbingUpSound;
+    [SerializeField] private AudioClip climbingDownSound;
+    [SerializeField] private AudioClip jokingSound;
 
     private void Awake()
     {
@@ -58,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
         // When player jumping
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isDoubleJump && isHorizontal)
+            if ((isDoubleJump || onGround) && isHorizontal)
                 Jump();
         }
 
@@ -99,12 +103,13 @@ public class PlayerMovement : MonoBehaviour
     private void Jump()
     {
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpSpeed);
-        if (OnGround())
+        if (onGround)
         {
             this.PostEvent(EventId.Jumping);
             SoundManager.Instance.Play(jumpSound);
+            onGround = false;
         }
-        else
+        else if (isDoubleJump)
         {
             this.PostEvent(EventId.DoubleJumping, true);
             SoundManager.Instance.Play(doubleJumpSound);
@@ -112,23 +117,31 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Check player is on ground or not
-    /// </summary>
-    /// <returns>true if player is on ground, false if player is not in ground</returns>
-    private bool OnGround()
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        Vector2 size = new Vector2(boxCollider.bounds.size.x - 0.02f, boxCollider.bounds.size.y - 0.1f);
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, size, 0, Vector2.down, 0.06f, groundLayer);
-
-        Debug.Log("Player is on ground: " + (hit ? true : false));
-
-        if (hit)
-            return true;
-
-        return false;
+        // Check if player is on ground and collision by top - bot direction
+        if (collision.gameObject.CompareTag("Platform") && collision.contacts[0].normal.y == 1)
+        {
+            onGround = true;
+        }
     }
 
+    /// <summary>
+    /// Used to set false when player not in ground
+    /// </summary>
+    private void CheckOnGround()
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size - Vector3.one * 0.1f, 0, Vector2.down, 0.15f, groundLayer);
+        if (hit.rigidbody == null)
+            onGround = false;
+
+        Debug.Log("Player is on wall: " + (onGround));
+    }
+
+    /// <summary>
+    /// Used to check player in on wall
+    /// </summary>
+    /// <returns>true if player in wall, false if player is not on wall</returns>
     private bool OnWall()
     {
         Vector2 size = new Vector2(boxCollider.bounds.size.x - 0.02f, boxCollider.bounds.size.y - 0.1f);
@@ -136,9 +149,7 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log("Player is on wall: " + (hit ? true : false));
 
-        if (hit)
-            return true;
-        return false;
+        return hit.collider != null;
     }
 
     /// <summary>
@@ -146,8 +157,9 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void UpdateState()
     {
+        CheckOnGround();
         // When player in ground, reset all state to origin
-        if (OnGround())
+        if (onGround)
         {
             isDoubleJump = true;
             isHorizontal = true;
@@ -174,7 +186,9 @@ public class PlayerMovement : MonoBehaviour
     {
         BoxCollider2D collider = GetComponent<BoxCollider2D>();
         Vector2 size = new Vector2(collider.bounds.size.x - 0.05f, collider.bounds.size.y - 0.1f);
-        RaycastHit2D hit = Physics2D.BoxCast(collider.bounds.center, size, 0, Vector2.down, 0.06f, groundLayer);
+        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size - Vector3.one * 0.1f, 0, Vector2.down, 0.15f, groundLayer);
+
+        //RaycastHit2D hit = Physics2D.BoxCast(collider.bounds.center, size, 0, Vector2.down, 0.06f, groundLayer);
 
         Gizmos.color = Color.red;
         if (hit.collider != null)
@@ -187,3 +201,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
+
+/* [Explain]
+ * Use OnTriggerStay2D to detect player is on ground realtime
+ * Use OnGround to fix when jump but onGround still equals 'true'
+ */
