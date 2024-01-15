@@ -199,8 +199,3 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 }
-
-/* [Explain]
- * Use OnTriggerStay2D to detect player is on ground realtime
- * Use OnGround to fix when jump but onGround still equals 'true'
- */

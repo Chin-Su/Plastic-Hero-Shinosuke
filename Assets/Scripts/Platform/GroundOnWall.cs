@@ -13,6 +13,7 @@ public class GroundOnWall : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.LogError(collision.gameObject.name + " : " + collision.contacts[1].normal.ToString());
+        // Check if player collision with ground in bottom, change its layer not is ground
         if (collision.GetContact(0).normal.y > 0)
             gameObject.layer = 0;
         foreach (var i in boxColliders)
@@ -22,6 +23,7 @@ public class GroundOnWall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Reassign layer for this is ground
         gameObject.layer = LayerMask.NameToLayer(groundLayer);
         foreach (var i in boxColliders)
             if (i.isTrigger)

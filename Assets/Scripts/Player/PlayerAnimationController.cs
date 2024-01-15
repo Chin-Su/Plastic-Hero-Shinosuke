@@ -96,5 +96,10 @@ public class PlayerAnimationController : MonoBehaviour
     { }
 
     private void Winner()
-    { }
+    {
+        animator.SetTrigger(winner);
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        GetComponent<PlayerMovement>().enabled = false;
+        GetComponent<PlayerAttacks>().enabled = false;
+    }
 }

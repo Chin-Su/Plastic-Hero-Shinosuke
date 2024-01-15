@@ -28,6 +28,9 @@ public class PlayerAttacks : MonoBehaviour
         timeCounter -= Time.deltaTime;
     }
 
+    /// <summary>
+    /// Handle fire by active bullet and set its direction
+    /// </summary>
     private void Fire()
     {
         this.PostEvent(EventId.Attacking);
@@ -37,6 +40,10 @@ public class PlayerAttacks : MonoBehaviour
         bullet.GetComponent<BulletController>().SetDirection((int)Mathf.Sign(transform.localScale.x));
     }
 
+    /// <summary>
+    /// Find index of bullet in list can fire
+    /// </summary>
+    /// <returns>Index of bullet is not active in hierachy</returns>
     private int FindBullet()
     {
         for (int i = 0; i < projectles.Length; i++)
