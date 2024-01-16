@@ -10,7 +10,7 @@ public class NextLevelController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             this.PostEvent(EventId.Winner);
-            Timer.Instance.Schedule(() => { SceneManager.LoadScene(nextLevel); }, 3.0f);
+            Timer.Schedule(this, () => { SceneManager.LoadScene(nextLevel); }, 3.0f);
         }
     }
 }
