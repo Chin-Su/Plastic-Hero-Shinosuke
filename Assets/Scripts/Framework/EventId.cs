@@ -13,5 +13,8 @@ public enum EventId
     Attacking,
     Die,
     Attacked,
-    Winner
+    Winner,
+    EnemyMakeDamage,
+    UnLockPlayer,
+    LockPlayer,
 }

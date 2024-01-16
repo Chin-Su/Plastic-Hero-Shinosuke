@@ -61,8 +61,7 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
     private void Flying()
-    {
-    }
+    { }
 
     private void Joking()
     {
@@ -90,16 +89,19 @@ public class PlayerAnimationController : MonoBehaviour
     }
 
     private void Die()
-    { }
+    {
+        animator.SetTrigger(die);
+        this.PostEvent(EventId.LockPlayer);
+    }
 
     private void Attacked()
-    { }
+    {
+        animator.SetTrigger(attacked);
+    }
 
     private void Winner()
     {
         animator.SetTrigger(winner);
-        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-        GetComponent<PlayerMovement>().enabled = false;
-        GetComponent<PlayerAttacks>().enabled = false;
+        this.PostEvent(EventId.LockPlayer);
     }
 }
