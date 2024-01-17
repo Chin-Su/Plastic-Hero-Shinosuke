@@ -1,0 +1,4 @@
+repository "Plastic Hero - Shinosuke@chinsu1209@cloud"
+  path "/"
+    br "/main"
+    co "/main"
