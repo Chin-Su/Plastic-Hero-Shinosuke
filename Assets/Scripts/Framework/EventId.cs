@@ -17,4 +17,6 @@ public enum EventId
     EnemyMakeDamage,
     UnLockPlayer,
     LockPlayer,
+    InitMenu,
+    Continue,
 }
