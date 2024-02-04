@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int layerEnemy;
 
     [Header("UI")]
-    [SerializeField] private Slider healthBar;
+    [SerializeField] private Image healthBar;
 
     private float currentHealth;
     private SpriteRenderer spriteRenderer;
@@ -42,6 +42,9 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth += damage;
         Debug.LogError(currentHealth);
+
+        healthBar.fillAmount = (Mathf.Clamp(currentHealth, 0, startHealth) / startHealth);
+
         if (currentHealth > 0)
         {
             this.PostEvent(EventId.Attacked);
