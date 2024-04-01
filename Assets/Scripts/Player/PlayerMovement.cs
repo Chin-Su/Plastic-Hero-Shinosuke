@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // When player jumping
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             if (isDoubleJump && isHorizontal)
                 Jump();
@@ -177,25 +177,4 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public bool IsOnWall() => !isHorizontal;
-
-    /**/
-
-    private void OnDrawGizmosSelected()
-    {
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        Vector2 size = new Vector2(collider.bounds.size.x - 0.05f, collider.bounds.size.y - 0.1f);
-        RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size - Vector3.one * 0.1f, 0, Vector2.down, 0.15f, groundLayer);
-
-        //RaycastHit2D hit = Physics2D.BoxCast(collider.bounds.center, size, 0, Vector2.down, 0.06f, groundLayer);
-
-        Gizmos.color = Color.red;
-        if (hit.collider != null)
-        {
-            Gizmos.DrawWireCube(hit.point, size);
-        }
-        else
-        {
-            Gizmos.DrawWireCube(collider.bounds.center + Vector3.down * 0.06f, size);
-        }
-    }
 }

@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,17 +15,33 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject pauseButton;
 
+    private bool isGameOver;
+    private static GameManager instance;
+
+    public static GameManager Instance
+    {
+        get => instance;
+        private set { }
+    }
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Start()
     {
         this.RegisterListener(EventId.UnLockPlayer, (param) => UnLockPlayer());
         this.RegisterListener(EventId.LockPlayer, (param) => LockPlayer());
         this.RegisterListener(EventId.Continue, (param) => Continue());
+
+        isGameOver = false;
     }
 
     /// <summary>
     /// Used to lock, not allow player move and attack
     /// </summary>
-    private void LockPlayer()
+    public void LockPlayer()
     {
         playerMovement.enabled = false;
         playerRigidbody.velocity = Vector2.zero;
@@ -45,7 +62,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Continue()
     {
-        UnLockPlayer();
+        if (!isGameOver)
+            UnLockPlayer();
         pauseButton.transform.DOScale(1, 0.2f).SetEase(Ease.OutBack).SetDelay(0.1f).OnComplete(() => DOTween.Kill(pauseButton.transform));
     }
 
@@ -58,5 +76,22 @@ public class GameManager : MonoBehaviour
         menu.SetActive(true);
         pauseButton.transform.DOScale(0, 0.2f).SetEase(Ease.InBack).OnComplete(() => DOTween.Kill(pauseButton.transform));
         this.PostEvent(EventId.InitMenu);
+    }
+
+    /*** Test ***/
+
+    public void Play()
+    {
+        SceneManager.LoadScene("Level_1");
+    }
+
+    /******************************************/
+    // ===== Declare properties in here ===== //
+    /******************************************/
+
+    public bool IsGameOver
+    {
+        get => isGameOver;
+        set => isGameOver = value;
     }
 }

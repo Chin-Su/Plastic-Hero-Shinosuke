@@ -1,5 +1,6 @@
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void Home()
     {
-        Debug.Log("[Home]");
+        SceneManager.LoadScene("Home");
     }
 
     /// <summary>
@@ -56,6 +57,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void Restart()
     {
-        Debug.Log("[Restart]");
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

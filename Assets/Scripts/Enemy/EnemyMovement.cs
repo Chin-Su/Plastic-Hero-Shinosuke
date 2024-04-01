@@ -35,7 +35,9 @@ public class EnemyMovement : MonoBehaviour
         if (canContainPlayer && collision.gameObject.CompareTag("Player"))
         {
             origin = collision.gameObject.transform.parent;
-            collision.gameObject.transform.SetParent(transform);
+
+            if (Mathf.Abs(collision.GetContact(0).normal.x) != 1)
+                collision.gameObject.transform.SetParent(transform);
         }
     }
 

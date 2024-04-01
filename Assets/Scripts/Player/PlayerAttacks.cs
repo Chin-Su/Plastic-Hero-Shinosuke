@@ -20,7 +20,7 @@ public class PlayerAttacks : MonoBehaviour
     private void Update()
     {
         // Check if player not move on wall and can attack
-        if (!playerMovement.IsOnWall() && Input.GetMouseButtonDown(0) && timeCounter < 0)
+        if (!playerMovement.IsOnWall() && Input.GetKeyDown(KeyCode.Space) && timeCounter < 0)
         {
             Fire();
             timeCounter = timeCoolDown;
