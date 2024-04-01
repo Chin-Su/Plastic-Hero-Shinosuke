@@ -31,7 +31,7 @@ Transform:
   - {fileID: 3398921619781284869}
   - {fileID: 5950327057031450732}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6804702101023988653
 GameObject:
@@ -195,7 +195,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!95 &1527676210481095240
 Animator:
@@ -312,7 +312,6 @@ MonoBehaviour:
   iFramesDuration: 1.5
   layerPlayer: 12
   layerEnemy: 10
-  healthBar: {fileID: 0}
 --- !u!1 &8397924671287144781
 GameObject:
   m_ObjectHideFlags: 0
