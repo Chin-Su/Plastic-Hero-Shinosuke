@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyMakeDamage : MonoBehaviour
 {
-    [SerializeField] private float damage;
+    [SerializeField] protected float damage;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,5 +14,10 @@ public class EnemyMakeDamage : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
             this.PostEvent(EventId.EnemyMakeDamage, -damage);
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 }
