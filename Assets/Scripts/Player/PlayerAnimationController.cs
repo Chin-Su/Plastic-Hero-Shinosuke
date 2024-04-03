@@ -92,7 +92,6 @@ public class PlayerAnimationController : MonoBehaviour
     private void Die()
     {
         animator.SetTrigger(die);
-        GameManager.Instance.IsGameOver = true;
         this.PostEvent(EventId.LockPlayer);
     }
 
