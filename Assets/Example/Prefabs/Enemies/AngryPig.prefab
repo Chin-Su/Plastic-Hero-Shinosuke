@@ -555,12 +555,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cdee77054883f4419f6176240f6f09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  isHorizontal: 0
+  speed: 2
+  isHorizontal: 1
   minEdge: 0
   maxEdge: 0
   isMoveMin: 0
-  useRigidbody: 0
+  useRigidbody: 1
 --- !u!114 &7251278459905227945
 MonoBehaviour:
   m_ObjectHideFlags: 0

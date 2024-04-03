@@ -49,6 +49,8 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void Home()
     {
+        this.PostEvent(EventId.UnLockPlayer);
+        Time.timeScale = 1;
         SceneManager.LoadScene("Home");
     }
 

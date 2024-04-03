@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: 5690644745814916730}
   - component: {fileID: 3190936832182676978}
   - component: {fileID: 6577670993708126750}
+  - component: {fileID: 7502700379743781021}
   m_Layer: 0
   m_Name: PencilBullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -195,3 +196,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   explore: isExplore
+--- !u!114 &7502700379743781021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6312650175889843583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22aedf075b16a214aa6ada642e94241a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0.5

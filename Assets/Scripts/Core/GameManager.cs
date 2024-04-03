@@ -85,6 +85,15 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Level_1");
     }
 
+    public void Exit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
     /******************************************/
     // ===== Declare properties in here ===== //
     /******************************************/

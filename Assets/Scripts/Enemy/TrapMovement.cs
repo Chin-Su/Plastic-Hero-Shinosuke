@@ -8,7 +8,6 @@ public class TrapMovement : MonoBehaviour
     [SerializeField] private float timeSpeed;
     [SerializeField] private float timeDelay;
     [SerializeField] private bool canContainPlayer;
-    [SerializeField] private bool useRigidbody;
 
     private Transform origin;
 
