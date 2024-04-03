@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public bool IsGameOver
     {
-        get => gameOver == 0;
+        get => gameOver <= 0;
         private set { }
     }
 
