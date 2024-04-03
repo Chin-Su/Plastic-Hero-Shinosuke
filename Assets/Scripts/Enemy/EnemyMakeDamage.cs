@@ -4,7 +4,7 @@ public class EnemyMakeDamage : MonoBehaviour
 {
     [SerializeField] protected float damage;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
             this.PostEvent(EventId.EnemyMakeDamage, -damage);
