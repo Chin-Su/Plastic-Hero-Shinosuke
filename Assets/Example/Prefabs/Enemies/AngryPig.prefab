@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8862004281325835065}
   - component: {fileID: 4439873724464368283}
   - component: {fileID: 1829042588609801093}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +31,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3725345569712421229}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
@@ -87,7 +88,7 @@ GameObject:
   - component: {fileID: 322027000988517902}
   - component: {fileID: 5952589412441425182}
   - component: {fileID: 747777670861927840}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: EnemyCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,6 +109,7 @@ RectTransform:
   m_Children:
   - {fileID: 3725345569712421229}
   m_Father: {fileID: 6412155442501965709}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -188,7 +190,7 @@ GameObject:
   - component: {fileID: 3725345569712421229}
   - component: {fileID: 2387173115759145420}
   - component: {fileID: 2704364714730034029}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,6 +212,7 @@ RectTransform:
   - {fileID: 8862004281325835065}
   - {fileID: 2812295462361295220}
   m_Father: {fileID: 5795316777588337367}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -276,7 +279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7413628565582937169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4dbcfc2fa52473d42a7a8ea7e5025fad, type: 3}
+  m_Script: {fileID: 11500000, guid: 038fce4ea16051b4f937454b41caa095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentOfThis: {fileID: 6412155442501965709}
@@ -291,7 +294,7 @@ GameObject:
   - component: {fileID: 918425998193301566}
   - component: {fileID: 6815549204427175439}
   - component: {fileID: 7235648798304915173}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -311,6 +314,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2812295462361295220}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -371,10 +375,9 @@ GameObject:
   - component: {fileID: 2522358424824007225}
   - component: {fileID: 7251278459905227945}
   - component: {fileID: 576683660331307264}
-  - component: {fileID: 4045322505115590203}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AngryPig
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -386,7 +389,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8930937441014754422}
-  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 11.737207, y: 9.055157, z: 0.011362978}
   m_LocalScale: {x: 2, y: 2, z: 1}
@@ -394,6 +396,7 @@ Transform:
   m_Children:
   - {fileID: 5795316777588337367}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1291100189405048479
 SpriteRenderer:
@@ -549,14 +552,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8930937441014754422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3aae43bd1da844ab8b863b26ac406d, type: 3}
+  m_Script: {fileID: 11500000, guid: 51d4f751e91aa6746a83e4619329ff59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  distance: 4.5
-  isHorizontal: 1
-  isMoveMin: 0
-  useRigidbody: 1
+  damage: 0.5
+  boss: 0
 --- !u!114 &7251278459905227945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -566,11 +566,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 8930937441014754422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d9291d4892d9e9488ebf7603f3c6dce, type: 3}
+  m_Script: {fileID: 11500000, guid: 1cdee77054883f4419f6176240f6f09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  boss: 0
+  speed: 1
+  isHorizontal: 1
+  minEdge: 0
+  maxEdge: 0
+  isMoveMin: 0
+  useRigidbody: 1
 --- !u!114 &576683660331307264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,30 +584,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8930937441014754422}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd14d38acb465d4ba5c13a8ab0d725f, type: 3}
+  m_Script: {fileID: 11500000, guid: 83d5b5be4e45b8d4ab4c72699e3303fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startHealth: 10
+  startHealth: 2
   sliderHealth: {fileID: 2387173115759145420}
---- !u!114 &4045322505115590203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8930937441014754422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4aec2c74817a59498f20ed118d2c761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0.5
-  speed: 2
-  range: 6
-  checkDelay: 0.5
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &8945326510704225500
 GameObject:
   m_ObjectHideFlags: 0
@@ -613,7 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2812295462361295220}
-  m_Layer: 5
+  m_Layer: 12
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -634,6 +619,7 @@ RectTransform:
   m_Children:
   - {fileID: 918425998193301566}
   m_Father: {fileID: 3725345569712421229}
+  m_RootOrder: -2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
