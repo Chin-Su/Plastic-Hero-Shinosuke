@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 8344786058077845968}
   - component: {fileID: 3776582032450457281}
   - component: {fileID: 7712646169854305372}
-  - component: {fileID: 3117340487584339831}
+  - component: {fileID: 8975167039570712712}
+  - component: {fileID: 1467015708339811920}
   m_Layer: 8
   m_Name: Saw
   m_TagString: Enemy
@@ -27,13 +28,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8074144492350659190}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.3112881, y: -2.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8344786058077845968
 SpriteRenderer:
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 850964081
-  m_SortingLayer: 0
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ca5ce7f3f3ac3bb499d37119b1867d7e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -153,7 +154,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3117340487584339831
+--- !u!114 &8975167039570712712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,7 +163,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 8074144492350659190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22aedf075b16a214aa6ada642e94241a, type: 3}
+  m_Script: {fileID: 11500000, guid: bb234d23a164ef147b6fbb10cddce692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.5
+  damage: 1
+--- !u!114 &1467015708339811920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8074144492350659190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b3aae43bd1da844ab8b863b26ac406d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  distance: 1.5
+  isHorizontal: 1
+  isMoveMin: 0
+  useRigidbody: 0

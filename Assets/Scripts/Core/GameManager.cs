@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject menu;
 
     [SerializeField] private GameObject pauseButton;
+    [SerializeField] private Text textHeart;
 
-    private bool isGameOver;
+    private int gameOver = 1;
     private static GameManager instance;
 
     public static GameManager Instance
@@ -34,8 +36,6 @@ public class GameManager : MonoBehaviour
         this.RegisterListener(EventId.UnLockPlayer, (param) => UnLockPlayer());
         this.RegisterListener(EventId.LockPlayer, (param) => LockPlayer());
         this.RegisterListener(EventId.Continue, (param) => Continue());
-
-        isGameOver = false;
     }
 
     /// <summary>
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void Continue()
     {
-        if (!isGameOver)
+        if (!IsGameOver)
             UnLockPlayer();
         pauseButton.transform.DOScale(1, 0.2f).SetEase(Ease.OutBack).SetDelay(0.1f).OnComplete(() => DOTween.Kill(pauseButton.transform));
     }
@@ -94,13 +94,33 @@ public class GameManager : MonoBehaviour
 #endif
     }
 
+    public void EndGame()
+    {
+    }
+
     /******************************************/
     // ===== Declare properties in here ===== //
     /******************************************/
 
+    /// <summary>
+    /// Used to check game is over
+    /// </summary>
     public bool IsGameOver
     {
-        get => isGameOver;
-        set => isGameOver = value;
+        get => gameOver == 0;
+        private set { }
+    }
+
+    /// <summary>
+    /// Used to get step respawn of player
+    /// </summary>
+    public int GameOver
+    {
+        get => gameOver;
+        set
+        {
+            gameOver = value;
+            textHeart.text = "x" + Mathf.Clamp(gameOver, 0, 1);
+        }
     }
 }

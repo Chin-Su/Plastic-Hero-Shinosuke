@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +42,6 @@ public class PlayerHealth : MonoBehaviour
     private void TakeDamage(float damage)
     {
         currentHealth += damage;
-        Debug.LogError(currentHealth);
 
         healthBar.fillAmount = (Mathf.Clamp(currentHealth, 0, startHealth) / startHealth);
 
@@ -51,7 +51,10 @@ public class PlayerHealth : MonoBehaviour
             StartCoroutine(Invunerability());
         }
         else
+        {
             this.PostEvent(EventId.Die);
+            StartCoroutine(Respawn());
+        }
     }
 
     /// <summary>
@@ -69,5 +72,28 @@ public class PlayerHealth : MonoBehaviour
             yield return new WaitForSeconds(iFramesDuration / (numberOfFlashes * 2));
         }
         Physics2D.IgnoreLayerCollision(layerPlayer, layerEnemy, false);
+    }
+
+    /// <summary>
+    /// Method to handle when player respawn
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator Respawn()
+    {
+        if (GetComponent<PlayerRespawn>().checkRespawn && !GameManager.Instance.IsGameOver)
+        {
+            yield return new WaitForSeconds(1.5f);
+            currentHealth = startHealth;
+            GetComponent<PlayerMovement>().enabled = true;
+            GetComponent<PlayerRespawn>().Respawn();
+            this.PostEvent(EventId.Attacked);
+            GameManager.Instance.GameOver--;
+            yield return null;
+        }
+        else
+        {
+            GameManager.Instance.EndGame();
+            yield return null;
+        }
     }
 }

@@ -81,7 +81,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317908203829910030}
-  - component: {fileID: 6571671812638256626}
+  - component: {fileID: 79814438025907620}
   m_Layer: 8
   m_Name: ArrowTrap
   m_TagString: Untagged
@@ -107,7 +107,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6571671812638256626
+--- !u!114 &79814438025907620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
