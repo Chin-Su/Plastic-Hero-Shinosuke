@@ -84,6 +84,7 @@ public class PlayerHealth : MonoBehaviour
         {
             yield return new WaitForSeconds(1.5f);
             currentHealth = startHealth;
+            healthBar.fillAmount = 1;
             GetComponent<PlayerMovement>().enabled = true;
             GetComponent<PlayerRespawn>().Respawn();
             this.PostEvent(EventId.Attacked);
