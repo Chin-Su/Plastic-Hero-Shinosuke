@@ -6270,7 +6270,7 @@ MonoBehaviour:
   minPosY: -2
   maxPosY: 14
   aheadDistance: 5
-  cameraSpeed: 3.5
+  cameraSpeed: 2
   player: {fileID: 7700216284182689776}
 --- !u!1001 &1822352692804721889
 PrefabInstance:

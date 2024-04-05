@@ -110,6 +110,7 @@ public class PlayerMovement : MonoBehaviour
         else if (isDoubleJump)
         {
             this.PostEvent(EventId.DoubleJumping, true);
+            this.PostEvent(EventId.Crashing, false);
             SoundManager.Instance.Play(doubleJumpSound);
             isDoubleJump = false;
         }
@@ -168,8 +169,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Handle state when player crashing
-        if (rigidbody.velocity.y < -10)
+        if (rigidbody.velocity.y < -5)
+        {
+            Debug.Log("Player crashing!");
             this.PostEvent(EventId.Crashing, true);
+        }
 
         // Handle some different animation
         if (Input.GetMouseButtonDown(2))
