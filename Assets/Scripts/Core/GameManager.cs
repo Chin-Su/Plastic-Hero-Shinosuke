@@ -17,8 +17,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private Text textHeart;
 
-    private int gameOver = 1;
     private static GameManager instance;
+    private int gameOver = 1;
+    private int card;
 
     public static GameManager Instance
     {
@@ -123,4 +124,10 @@ public class GameManager : MonoBehaviour
             textHeart.text = "x" + Mathf.Clamp(gameOver, 0, 1);
         }
     }
+
+    public void SetCard()
+    { card += 1; }
+
+    public int GetCard()
+    { return card; }
 }

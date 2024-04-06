@@ -181,4 +181,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public bool IsOnWall() => !isHorizontal;
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        // Handle user colelct card
+        if (collision.CompareTag("Card"))
+        {
+            GameManager.Instance.SetCard();
+            collision.gameObject.SetActive(false);
+        }
+    }
 }
