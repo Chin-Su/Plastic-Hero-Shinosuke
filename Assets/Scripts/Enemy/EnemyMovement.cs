@@ -35,7 +35,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if (isMoveMin)
             {
-                if (transform.position.x > minEdge)
+                if (transform.localPosition.x > minEdge)
                 {
                     if (useRigidbody)
                     {
@@ -50,7 +50,7 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                if (transform.position.x < maxEdge)
+                if (transform.localPosition.x < maxEdge)
                 {
                     if (useRigidbody)
                     {
@@ -68,7 +68,7 @@ public class EnemyMovement : MonoBehaviour
         {
             if (isMoveMin)
             {
-                if (transform.position.y > minEdge)
+                if (transform.localPosition.y > minEdge)
                 {
                     transform.Translate(new Vector3(0, -Time.deltaTime * speed, 0), Space.World);
                 }
@@ -77,7 +77,7 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
-                if (transform.position.y < maxEdge)
+                if (transform.localPosition.y < maxEdge)
                 {
                     transform.Translate(new Vector3(0, Time.deltaTime * speed, 0), Space.World);
                 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     [Header("Animation")]
     [SerializeField] private string explore;
@@ -10,7 +11,6 @@ public class BulletController : MonoBehaviour
     private float timeLife;
     private int direction = 1;
     private new Rigidbody2D rigidbody;
-    private SpriteRenderer spriteRenderer;
     private Animator animator;
 
     private void Awake()
@@ -37,7 +37,6 @@ public class BulletController : MonoBehaviour
     {
         timeLife = 3;
         this.direction = direction;
-        var localScale = transform.localScale;
         if (direction < 0)
             spriteRenderer.flipX = false;
     }
