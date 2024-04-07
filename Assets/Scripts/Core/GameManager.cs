@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private Text textHeart;
+    [SerializeField] private GameObject cardImage;
 
     private static GameManager instance;
     private int gameOver = 1;
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         this.RegisterListener(EventId.UnLockPlayer, (param) => UnLockPlayer());
         this.RegisterListener(EventId.LockPlayer, (param) => LockPlayer());
         this.RegisterListener(EventId.Continue, (param) => Continue());
+        cardImage.SetActive(false);
     }
 
     /// <summary>
@@ -126,7 +128,10 @@ public class GameManager : MonoBehaviour
     }
 
     public void SetCard()
-    { card += 1; }
+    {
+        card += 1;
+        cardImage.SetActive(true);
+    }
 
     public int GetCard()
     { return card; }
