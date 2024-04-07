@@ -4,6 +4,7 @@ public class SoundManager : MonoBehaviour
 {
     private static SoundManager instance;
     private AudioSource audioSource;
+    public AudioSource musicSound;
 
     public static SoundManager Instance
     {
@@ -39,8 +40,26 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ChangeMusic();
+        ChangeSound();
+    }
+
     public void Play(AudioClip audioClip)
     {
         audioSource.PlayOneShot(audioClip);
+    }
+
+    public void ChangeSound()
+    {
+        audioSource.volume = PlayerPrefs.GetFloat("sound", 1);
+
+        Debug.Log("Sound: " + PlayerPrefs.GetFloat("sound", 1));
+    }
+
+    public void ChangeMusic()
+    {
+        musicSound.volume = PlayerPrefs.GetFloat("music", 1);
     }
 }

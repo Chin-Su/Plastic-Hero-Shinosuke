@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour
         this.RegisterListener(EventId.UnLockPlayer, (param) => UnLockPlayer());
         this.RegisterListener(EventId.LockPlayer, (param) => LockPlayer());
         this.RegisterListener(EventId.Continue, (param) => Continue());
-        cardImage.SetActive(false);
+
+        if (cardImage)
+            cardImage.SetActive(false);
     }
 
     /// <summary>
