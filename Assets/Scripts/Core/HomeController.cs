@@ -22,6 +22,7 @@ public class HomeController : MonoBehaviour
 
     public void OpenSetting()
     {
+        SoundManager.Instance.Play(GameManager.Instance.buttonClickSound);
         settingDialog.SetActive(true);
         contentSetting.transform.DOScale(1, 0.5f).SetEase(Ease.OutBack);
         sound.value = PlayerPrefs.GetFloat("sound");
@@ -30,6 +31,8 @@ public class HomeController : MonoBehaviour
 
     public void CloseSetting()
     {
+        SoundManager.Instance.Play(GameManager.Instance.buttonClickSound);
+
         contentSetting.transform.DOScale(0, 0.5f).SetEase(Ease.InBack).OnComplete(() =>
         {
             settingDialog.SetActive(false);

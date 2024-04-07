@@ -82,6 +82,7 @@ MonoBehaviour:
   pauseButton: {fileID: 262593782704764998}
   textHeart: {fileID: 7784927623168185152}
   cardImage: {fileID: 7249527072165228517}
+  buttonClickSound: {fileID: 8300000, guid: 8b59c38987f2b454e8a84e3196641849, type: 3}
 --- !u!1 &839031867984466352
 GameObject:
   m_ObjectHideFlags: 0

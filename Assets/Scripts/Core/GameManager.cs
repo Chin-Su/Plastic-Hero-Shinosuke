@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text textHeart;
     [SerializeField] private GameObject cardImage;
 
+    [Header("Sound")]
+    public AudioClip buttonClickSound;
+
     private static GameManager instance;
     private int gameOver = 1;
     private int card;
@@ -77,6 +80,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Pause()
     {
+        SoundManager.Instance.Play(buttonClickSound);
         LockPlayer();
         menu.SetActive(true);
         pauseButton.transform.DOScale(0, 0.2f).SetEase(Ease.InBack).OnComplete(() => DOTween.Kill(pauseButton.transform));
@@ -87,11 +91,13 @@ public class GameManager : MonoBehaviour
 
     public void Play()
     {
+        SoundManager.Instance.Play(buttonClickSound);
         SceneManager.LoadScene("Level_1");
     }
 
     public void Exit()
     {
+        SoundManager.Instance.Play(buttonClickSound);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

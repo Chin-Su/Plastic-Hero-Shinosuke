@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2181342457535858333
 MonoBehaviour:
@@ -49,3 +49,6 @@ MonoBehaviour:
   playerAttacks: {fileID: 0}
   menu: {fileID: 0}
   pauseButton: {fileID: 0}
+  textHeart: {fileID: 0}
+  cardImage: {fileID: 0}
+  buttonClickSound: {fileID: 8300000, guid: 8b59c38987f2b454e8a84e3196641849, type: 3}
