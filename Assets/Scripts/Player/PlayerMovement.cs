@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private AudioClip climbingDownSound;
     [SerializeField] private AudioClip jokingSound;
 
+    private float timeCheckOnWall = 0;
+
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -38,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
         // When player moving on the ground
         if (isHorizontal)
@@ -52,10 +55,10 @@ public class PlayerMovement : MonoBehaviour
         // When player moving on the wall
         else
         {
-            rigidbody.velocity = new Vector2(0, horizontalInput * moveOnWallSpeed);
+            rigidbody.velocity = new Vector2(0, verticalInput * moveOnWallSpeed);
             // Post event when player climbing
-            this.PostEvent(EventId.ClimbingUp, horizontalInput);
-            this.PostEvent(EventId.ClimbingDown, horizontalInput);
+            this.PostEvent(EventId.ClimbingUp, verticalInput);
+            this.PostEvent(EventId.ClimbingDown, verticalInput);
         }
 
         // When player jumping
@@ -65,8 +68,13 @@ public class PlayerMovement : MonoBehaviour
                 Jump();
         }
 
+        if (Input.GetKey(KeyCode.W))
+            timeCheckOnWall += Time.deltaTime;
+        else
+            timeCheckOnWall = 0;
+
         // When player change mode from move on ground to move on wall
-        if (isHorizontal && OnWall() && Input.GetMouseButtonDown(1))
+        if (isHorizontal && OnWall() && timeCheckOnWall > 1)
         {
             rigidbody.DOMoveY(transform.position.y + 0.25f, 0.1f).OnComplete(() =>
             {
@@ -122,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     /// <returns>true if player is on ground, false if player is not on ground</returns>
     private bool OnGround()
     {
-        // Create a boxcast to detect object player collision
+        // Create a box cast to detect object player collision
         RaycastHit2D hit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.05f, groundLayer);
         if (hit.collider != null)
         {
@@ -184,7 +192,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Handle user colelct card
+        // Handle user collect card
         if (collision.CompareTag("Card"))
         {
             GameManager.Instance.SetCard();

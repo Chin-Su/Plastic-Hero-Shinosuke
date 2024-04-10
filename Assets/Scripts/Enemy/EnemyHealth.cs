@@ -5,6 +5,7 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private float startHealth;
     [SerializeField] private Slider sliderHealth;
+    [SerializeField] private bool notAttacked = false;
 
     private float currentHealth;
     private Animator animator;
@@ -28,7 +29,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet") || collision.CompareTag("Enemy"))
+        if ((collision.CompareTag("Bullet") && !notAttacked) || collision.CompareTag("Enemy"))
         {
             TakeDamage(collision.GetComponent<EnemyMakeDamage>().GetDamage());
         }
