@@ -11,6 +11,7 @@ public class NextLevelController : MonoBehaviour
         {
             this.PostEvent(EventId.Winner);
             Timer.Schedule(this, () => { SceneManager.LoadScene(nextLevel); }, 3.0f);
+            PlayerPrefs.SetString("level", nextLevel);
         }
     }
 }

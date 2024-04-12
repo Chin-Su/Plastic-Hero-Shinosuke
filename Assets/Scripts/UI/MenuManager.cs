@@ -35,6 +35,7 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void Continue()
     {
+        SoundManager.Instance.Play(GameManager.Instance.buttonClickSound);
         Time.timeScale = 1;
         content.transform.DOScale(0, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
         {
@@ -49,9 +50,15 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void Home()
     {
-        this.PostEvent(EventId.UnLockPlayer);
+        SoundManager.Instance.Play(GameManager.Instance.buttonClickSound);
         Time.timeScale = 1;
-        SceneManager.LoadScene("Home");
+        content.transform.DOScale(0, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            DOTween.Kill(content.transform);
+            gameObject.SetActive(false);
+            this.PostEvent(EventId.UnLockPlayer);
+            SceneManager.LoadScene("Home");
+        });
     }
 
     /// <summary>
@@ -59,7 +66,13 @@ public class MenuManager : MonoBehaviour
     /// </summary>
     public void Restart()
     {
+        SoundManager.Instance.Play(GameManager.Instance.buttonClickSound);
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        content.transform.DOScale(0, 0.3f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            DOTween.Kill(content.transform);
+            gameObject.SetActive(false);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        });
     }
 }

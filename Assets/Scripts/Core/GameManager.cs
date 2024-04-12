@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseButton;
     [SerializeField] private Text textHeart;
     [SerializeField] private GameObject cardImage;
+    [SerializeField] private GameObject buttonNewGame;
 
     [Header("Sound")]
     public AudioClip buttonClickSound;
@@ -44,6 +45,9 @@ public class GameManager : MonoBehaviour
 
         if (cardImage)
             cardImage.SetActive(false);
+
+        if (buttonNewGame)
+            buttonNewGame.SetActive(PlayerPrefs.GetInt("inProgress", 0) == 1);
     }
 
     /// <summary>
@@ -89,10 +93,20 @@ public class GameManager : MonoBehaviour
 
     /*** Test ***/
 
+    public void NewGame()
+    {
+        PlayerPrefs.SetString("level", "Level_1");
+        Play();
+    }
+
     public void Play()
     {
         SoundManager.Instance.Play(buttonClickSound);
-        SceneManager.LoadScene("Level_1");
+        Timer.Schedule(this, () =>
+        {
+            SceneManager.LoadScene(PlayerPrefs.GetString("level", "Level_1"));
+            PlayerPrefs.SetInt("inProgress", 1);
+        }, buttonClickSound.length);
     }
 
     public void Exit()
