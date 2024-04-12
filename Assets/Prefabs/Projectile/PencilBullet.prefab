@@ -195,6 +195,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  spriteRenderer: {fileID: 0}
+  bulletExplore: {fileID: 8300000, guid: 49e749e9953a26646b8c560f7736ce5b, type: 3}
   explore: isExplore
 --- !u!114 &7502700379743781021
 MonoBehaviour:

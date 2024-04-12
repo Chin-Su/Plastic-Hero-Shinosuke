@@ -50,6 +50,12 @@ public class GameManager : MonoBehaviour
             buttonNewGame.SetActive(PlayerPrefs.GetInt("inProgress", 0) == 1);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P) && menu != null && !menu.activeInHierarchy)
+            Pause();
+    }
+
     /// <summary>
     /// Used to lock, not allow player move and attack
     /// </summary>

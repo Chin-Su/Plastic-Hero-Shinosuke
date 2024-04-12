@@ -4,6 +4,7 @@ public class BulletController : MonoBehaviour
 {
     [SerializeField] private float speed;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private AudioClip bulletExplore;
 
     [Header("Animation")]
     [SerializeField] private string explore;
@@ -35,7 +36,7 @@ public class BulletController : MonoBehaviour
     /// <param name="direction">Enter int value, 1 to move left-right, -1 to move right-left</param>
     public void SetDirection(int direction)
     {
-        timeLife = 3;
+        timeLife = 1.0f;
         this.direction = direction;
         if (direction < 0)
             spriteRenderer.flipX = false;
@@ -50,5 +51,6 @@ public class BulletController : MonoBehaviour
     {
         direction = 0;
         animator.SetTrigger(explore);
+        SoundManager.Instance.Play(bulletExplore);
     }
 }

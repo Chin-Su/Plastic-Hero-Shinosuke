@@ -194,3 +194,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevel: Level_2
+  win: {fileID: 8300000, guid: eb32c190c81431c4b8cef87b6c8f9eaa, type: 3}

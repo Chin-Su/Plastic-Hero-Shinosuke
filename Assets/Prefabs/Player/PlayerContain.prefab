@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 2220359093040467818}
   timeCoolDown: 0.5
+  playerFire: {fileID: 8300000, guid: a5067efd6d7a1a64b973afc48f613fcc, type: 3}
   projectles:
   - {fileID: 6243929124364491598}
   - {fileID: 1294402155576350139}

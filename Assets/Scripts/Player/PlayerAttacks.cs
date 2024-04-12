@@ -4,6 +4,7 @@ public class PlayerAttacks : MonoBehaviour
 {
     [SerializeField] private Transform firePoint;
     [SerializeField] private float timeCoolDown;
+    [SerializeField] private AudioClip playerFire;
 
     [HideInInspector]
     [SerializeField] private GameObject[] projectles;
@@ -33,6 +34,7 @@ public class PlayerAttacks : MonoBehaviour
     /// </summary>
     private void Fire()
     {
+        SoundManager.Instance.Play(playerFire);
         this.PostEvent(EventId.Attacking);
         GameObject bullet = projectles[FindBullet()];
         bullet.SetActive(true);
