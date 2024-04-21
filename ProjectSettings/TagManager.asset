@@ -8,6 +8,8 @@ TagManager:
   - Wall
   - Enemy
   - Bullet
+  - CheckPoint
+  - Card
   layers:
   - Default
   - TransparentFX

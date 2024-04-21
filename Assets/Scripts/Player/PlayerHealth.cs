@@ -93,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.EndGame();
+            Timer.Schedule(this, () => GameManager.Instance.EndGame(), 0.2f);
             yield return null;
         }
     }

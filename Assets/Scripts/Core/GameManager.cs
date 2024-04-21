@@ -14,7 +14,9 @@ public class GameManager : MonoBehaviour
     [Header("UI Component")]
     [SerializeField] private GameObject menu;
 
+    [SerializeField] private Text titleMenu;
     [SerializeField] private GameObject pauseButton;
+    [SerializeField] private GameObject continueButton;
     [SerializeField] private Text textHeart;
     [SerializeField] private GameObject cardImage;
     [SerializeField] private GameObject buttonNewGame;
@@ -127,6 +129,12 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        LockPlayer();
+        menu.SetActive(true);
+        pauseButton.transform.DOScale(0, 0.2f).SetEase(Ease.InBack).OnComplete(() => DOTween.Kill(pauseButton.transform));
+        this.PostEvent(EventId.InitMenu, false);
+        continueButton.SetActive(false);
+        titleMenu.text = "Game Over";
     }
 
     /******************************************/

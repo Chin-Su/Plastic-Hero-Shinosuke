@@ -8,25 +8,27 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
-        this.RegisterListener(EventId.InitMenu, (param) => Init());
+        this.RegisterListener(EventId.InitMenu, (param) => Init((bool)param));
         Debug.Log("Call init menu in awake!");
     }
 
     private void Start()
     {
-        this.RegisterListener(EventId.InitMenu, (param) => Init());
+        this.RegisterListener(EventId.InitMenu, (param) => Init((bool)param));
         Debug.Log("Call init menu in start!");
     }
 
     /// <summary>
     /// Used to set content for menu
     /// </summary>
-    private void Init()
+    private void Init(bool frozen = true)
     {
         content.transform.DOScale(1, 0.3f).SetEase(Ease.OutBack).OnComplete(() =>
         {
             DOTween.Kill(content.transform);
-            Time.timeScale = 0f;
+
+            if (frozen)
+                Time.timeScale = 0f;
         });
     }
 
