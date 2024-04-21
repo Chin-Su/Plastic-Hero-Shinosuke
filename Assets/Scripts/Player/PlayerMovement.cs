@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
             timeCheckOnWall = 0;
 
         // When player change mode from move on ground to move on wall
-        if (isHorizontal && OnWall() && timeCheckOnWall > 1)
+        if (isHorizontal && OnWall() && timeCheckOnWall > 0.5f)
         {
             rigidbody.DOMoveY(transform.position.y + 0.25f, 0.1f).OnComplete(() =>
             {

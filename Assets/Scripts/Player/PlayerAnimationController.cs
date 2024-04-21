@@ -91,6 +91,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Die()
     {
+        animator.Rebind();
         animator.SetTrigger(die);
         this.PostEvent(EventId.LockPlayer);
     }
@@ -102,6 +103,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Winner()
     {
+        animator.Rebind();
         animator.SetTrigger(winner);
         this.PostEvent(EventId.LockPlayer);
     }
