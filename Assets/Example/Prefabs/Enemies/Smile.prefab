@@ -282,6 +282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHealth: 100
   sliderHealth: {fileID: 3859125582991135838}
+  notAttacked: 0
+  enemyDieSound: {fileID: 8300000, guid: 58a96dc0f4c6c7643964ae4a63ca1cdc, type: 3}
 --- !u!114 &4923354352711960454
 MonoBehaviour:
   m_ObjectHideFlags: 0

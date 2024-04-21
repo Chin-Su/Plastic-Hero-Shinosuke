@@ -590,6 +590,7 @@ MonoBehaviour:
   startHealth: 2
   sliderHealth: {fileID: 2387173115759145420}
   notAttacked: 0
+  enemyDieSound: {fileID: 8300000, guid: 58a96dc0f4c6c7643964ae4a63ca1cdc, type: 3}
 --- !u!1 &8945326510704225500
 GameObject:
   m_ObjectHideFlags: 0

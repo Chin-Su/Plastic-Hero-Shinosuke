@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField] private float startHealth;
     [SerializeField] private Slider sliderHealth;
     [SerializeField] private bool notAttacked = false;
+    [SerializeField] private AudioClip enemyDieSound;
 
     private float currentHealth;
     private Animator animator;
@@ -24,7 +25,10 @@ public class EnemyHealth : MonoBehaviour
     private void Update()
     {
         if (currentHealth == 0)
+        {
+            SoundManager.Instance.Play(enemyDieSound);
             gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
