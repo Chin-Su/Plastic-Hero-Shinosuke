@@ -4,6 +4,7 @@ public class CheckPoint : MonoBehaviour
 {
     private BoxCollider2D boxCollider;
     private Animator animator;
+    [SerializeField] private AudioClip checkPointSound;
 
     private void Awake()
     {
@@ -17,6 +18,7 @@ public class CheckPoint : MonoBehaviour
         {
             boxCollider.enabled = false;
             animator.SetTrigger("isChecked");
+            SoundManager.Instance.Play(checkPointSound);
         }
     }
 }

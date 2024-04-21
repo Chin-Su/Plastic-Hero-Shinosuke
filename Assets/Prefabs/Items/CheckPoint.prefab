@@ -165,3 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed21a2f911bebb418aeb46dc30f54b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkPointSound: {fileID: 8300000, guid: c3d6d5093bd0df94496d1aceebf135ec, type: 3}
