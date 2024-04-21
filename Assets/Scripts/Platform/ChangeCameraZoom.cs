@@ -15,10 +15,11 @@ public class ChangeCameraZoom : MonoBehaviour
 
         for (int i = 0; i < cameras.Count; i++)
         {
+            int index = i;
             Timer.Schedule(this, () =>
             {
-                CameraManager.SwitchCamera(cameras[i]);
-            }, i * timeMoveCam);
+                CameraManager.SwitchCamera(cameras[index]);
+            }, index * timeMoveCam + 1.0f);
         }
 
         Timer.Schedule(this, () =>
@@ -26,6 +27,6 @@ public class ChangeCameraZoom : MonoBehaviour
             this.PostEvent(EventId.UnLockPlayer);
             this.PostEvent(EventId.ChangeTimeMoveCam, 1.5f);
             CameraManager.SwitchCamera(playerCamera);
-        }, timeMoveCam * cameras.Count);
+        }, timeMoveCam * cameras.Count + 1);
     }
 }

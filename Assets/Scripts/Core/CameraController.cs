@@ -36,6 +36,6 @@ public class CameraController : MonoBehaviour
 
     private void ChangeTimeMoveCam(float timeMove)
     {
-        GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = timeMove;
+        Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = timeMove;
     }
 }
