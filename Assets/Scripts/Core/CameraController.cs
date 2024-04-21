@@ -1,4 +1,6 @@
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CameraController : MonoBehaviour
 {
@@ -14,7 +16,11 @@ public class CameraController : MonoBehaviour
     [Header("Target")]
     [SerializeField] private Transform player;
 
-    private float currentPosX;
+    private void Start()
+    {
+        this.RegisterListener(EventId.ChangeTimeMoveCam, (param) => { ChangeTimeMoveCam((float)param); });
+    }
+
     private float lookAhead;
 
     private void Update()
@@ -26,5 +32,10 @@ public class CameraController : MonoBehaviour
         // Move camera
         transform.position = new Vector3(xPos, yPos, transform.position.z);
         lookAhead = Mathf.Lerp(lookAhead, (aheadDistance * Mathf.Sign(player.localScale.x)), Time.deltaTime * cameraSpeed);
+    }
+
+    private void ChangeTimeMoveCam(float timeMove)
+    {
+        GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = timeMove;
     }
 }

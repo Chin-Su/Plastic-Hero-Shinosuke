@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
         LockPlayer();
         menu.SetActive(true);
         pauseButton.transform.DOScale(0, 0.2f).SetEase(Ease.InBack).OnComplete(() => DOTween.Kill(pauseButton.transform));
-        this.PostEvent(EventId.InitMenu);
+        this.PostEvent(EventId.InitMenu, true);
     }
 
     /*** Test ***/
