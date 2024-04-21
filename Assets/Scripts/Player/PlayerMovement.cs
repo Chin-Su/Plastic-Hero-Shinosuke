@@ -80,7 +80,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 isHorizontal = false;
                 this.PostEvent(EventId.Climbing, true);
-                rigidbody.gravityScale = 0;
+                rigidbody.gravityScale = 0.5f;
                 rigidbody.velocity = Vector2.zero;
                 DOTween.Kill(rigidbody);
             });
