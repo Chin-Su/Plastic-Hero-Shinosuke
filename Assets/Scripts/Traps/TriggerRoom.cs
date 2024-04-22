@@ -7,6 +7,11 @@ public class TriggerRoom : MonoBehaviour
 
     private bool check;
 
+    private void Start()
+    {
+        enemy.GetComponent<EnemyMovement>().enabled = false;
+    }
+
     private void Update()
     {
         if (!enemy.activeInHierarchy)
@@ -23,6 +28,8 @@ public class TriggerRoom : MonoBehaviour
             if (!check && enemy.activeInHierarchy)
             {
                 check = true;
+
+                enemy.GetComponent<EnemyMovement>().enabled = true;
                 ClosedDoors();
             }
         }

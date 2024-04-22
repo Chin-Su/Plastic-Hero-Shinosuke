@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [Header("Sound")]
     public AudioClip buttonClickSound;
 
+    public AudioClip lose;
+
     private static GameManager instance;
     private int gameOver = 1;
     private int card;
@@ -135,6 +137,7 @@ public class GameManager : MonoBehaviour
         this.PostEvent(EventId.InitMenu, false);
         continueButton.SetActive(false);
         titleMenu.text = "Game Over";
+        SoundManager.Instance.Play(lose);
     }
 
     /******************************************/

@@ -86,6 +86,7 @@ MonoBehaviour:
   cardImage: {fileID: 3721789290634826412}
   buttonNewGame: {fileID: 0}
   buttonClickSound: {fileID: 8300000, guid: 8b59c38987f2b454e8a84e3196641849, type: 3}
+  lose: {fileID: 8300000, guid: eecd9d29e3a0346459a82780dc31fe6c, type: 3}
 --- !u!1 &839031867984466352
 GameObject:
   m_ObjectHideFlags: 0

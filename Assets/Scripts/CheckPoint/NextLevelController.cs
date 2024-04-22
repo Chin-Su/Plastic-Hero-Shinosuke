@@ -11,7 +11,10 @@ public class NextLevelController : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             this.PostEvent(EventId.Winner);
-            PlayerPrefs.SetString("level", nextLevel);
+
+            if (nextLevel != "" && nextLevel != "End")
+                PlayerPrefs.SetString("level", nextLevel);
+
             SoundManager.Instance.Play(win);
             Timer.Schedule(this, () => { SceneManager.LoadScene(nextLevel); }, win.length);
         }
