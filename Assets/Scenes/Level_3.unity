@@ -46517,6 +46517,7 @@ MonoBehaviour:
   - {fileID: 1078277313}
   - {fileID: 2076312589}
   playerCamera: {fileID: 60319376}
+  guide: {fileID: 0}
 --- !u!4 &441140821
 Transform:
   m_ObjectHideFlags: 0
@@ -47985,6 +47986,10 @@ PrefabInstance:
       propertyPath: nextLevel
       value: Level_4
       objectReference: {fileID: 0}
+    - target: {fileID: 7646985763118278314, guid: 7ecacfcb943efa24c88e1ea19e03dbfc, type: 3}
+      propertyPath: m_BodyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8925191764707895612, guid: 7ecacfcb943efa24c88e1ea19e03dbfc, type: 3}
       propertyPath: m_Size.x
       value: 1.4334145
@@ -49011,6 +49016,7 @@ MonoBehaviour:
   - {fileID: 1038633008}
   - {fileID: 1339017426}
   playerCamera: {fileID: 60319376}
+  guide: {fileID: 0}
 --- !u!4 &1675654372
 Transform:
   m_ObjectHideFlags: 0

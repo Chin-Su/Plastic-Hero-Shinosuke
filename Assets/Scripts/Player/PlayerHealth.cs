@@ -1,5 +1,6 @@
 using DG.Tweening.Core.Easing;
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,6 +45,9 @@ public class PlayerHealth : MonoBehaviour
         currentHealth += damage;
 
         healthBar.fillAmount = (Mathf.Clamp(currentHealth, 0, startHealth) / startHealth);
+
+        if (damage > 0)
+            return;
 
         if (currentHealth > 0)
         {
